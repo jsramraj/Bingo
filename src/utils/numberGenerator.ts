@@ -1,5 +1,4 @@
 export const generateRandomNumbers = (rows: number, cols: number): number[][] => {
-  const totalCells = rows * cols;
   const numbers = Array.from({ length: 75 }, (_, i) => i + 1);
   
   // Shuffle array
