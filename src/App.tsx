@@ -5,12 +5,16 @@ import { GridSizeForm } from './components/GridSizeForm';
 import { useBingoGame } from './hooks/useBingoGame';
 
 function App() {
-  const [gameStarted, setGameStarted] = useState(false);
+  const [gameStarted, setGameStarted] = useState(() => {
+    const saved = localStorage.getItem('bingo-game-started');
+    return saved === 'true';
+  });
   const { grid, markedCells, markCell, resetGame } = useBingoGame(3, 3);
 
   const handleGridSizeSubmit = (rows: number, cols: number) => {
     resetGame(rows, cols);
     setGameStarted(true);
+    localStorage.setItem('bingo-game-started', 'true');
   };
 
   return (
@@ -25,7 +29,10 @@ function App() {
             markedCells={markedCells}
             onCellClick={markCell}
           />
-          <button className="reset-button" onClick={() => setGameStarted(false)}>
+          <button className="reset-button" onClick={() => {
+            setGameStarted(false);
+            localStorage.removeItem('bingo-game-started');
+          }}>
             New Game
           </button>
         </div>

@@ -1,38 +1,125 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  max-width: 300px;
+  gap: 25px;
+  width: 280px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  animation: formAppear 0.5s ease-out;
 }
 
 .inputGroup {
   display: flex;
-  gap: 8px;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px;
+  background: rgba(31, 33, 45, 0.6);
+  border-radius: 12px;
   align-items: center;
 }
 
 .inputGroup label {
-  min-width: 80px;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
 }
 
-.inputGroup input {
-  width: 60px;
-  padding: 4px;
-  font-size: 1rem;
+.counterControl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: rgba(31, 33, 45, 0.6);
+  padding: 8px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 200px;
 }
 
-button {
-  padding: 8px 16px;
-  background: #2196F3;
+.controlButton {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  margin: 0;
+}
+
+.controlButton:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.controlButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.controlButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.numberDisplay {
+  min-width: 40px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.submitButton {
+  margin-top: 10px;
+  padding: 18px;
+  background: #3498db;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 12px;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.submitButton:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+
+.submitButton:active {
+  transform: translateY(0);
 }
 
 button:hover {
-  background: #1976D2;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 180, 219, 0.4);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+@keyframes formAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
