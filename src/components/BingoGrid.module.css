@@ -1,3 +1,31 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.scoreContainer {
+  font-size: 1.5rem;
+  color: #fff;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.scoreLabel {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.scoreValue {
+  font-size: 2rem;
+  color: #00ff00;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
 .grid {
   display: grid;
   gap: 8px;

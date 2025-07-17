@@ -4,13 +4,14 @@ import styles from './BingoCell.module.css';
 interface BingoCellProps {
   number: number;
   isMarked: boolean;
+  isBingo?: boolean;
   onClick: () => void;
 }
 
-export const BingoCell: FC<BingoCellProps> = ({ number, isMarked, onClick }) => {
+export const BingoCell: FC<BingoCellProps> = ({ number, isMarked, isBingo, onClick }) => {
   return (
     <button 
-      className={`${styles.cell} ${isMarked ? styles.marked : ''}`}
+      className={`${styles.cell} ${isMarked ? styles.marked : ''} ${isBingo ? styles.bingo : ''}`}
       onClick={onClick}
     >
       {number}
