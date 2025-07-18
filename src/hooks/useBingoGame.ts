@@ -80,7 +80,10 @@ export const useBingoGame = (initialRows: number, initialCols: number): UseBingo
   };
 
   const generateGrid = (rows: number, cols: number) => {
-    const numbers = Array.from({ length: 75 }, (_, i) => i + 1);
+    const totalCells = rows * cols;
+    // Create array with sequential numbers
+    const numbers = Array.from({ length: totalCells }, (_, i) => i + 1);
+    
     // Shuffle array using Fisher-Yates algorithm
     for (let i = numbers.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -90,6 +93,7 @@ export const useBingoGame = (initialRows: number, initialCols: number): UseBingo
     const newGrid: number[][] = [];
     const newMarkedCells: boolean[][] = [];
     
+    // Fill grid with shuffled numbers
     for (let i = 0; i < rows; i++) {
       newGrid[i] = numbers.slice(i * cols, (i + 1) * cols);
       newMarkedCells[i] = new Array(cols).fill(false);
