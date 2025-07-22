@@ -1,27 +1,33 @@
 import { useState } from 'react';
 import type { FC } from 'react';
 import styles from './GridSizeForm.module.css';
+import { MIN_GRID_SIZE, MAX_GRID_SIZE, MIN_MAX_NUMBER, MAX_MAX_NUMBER } from '../constants';
 
 interface GridSizeFormProps {
   onSubmit: (rows: number, cols: number, maxNumber: number) => void;
+  initialRows?: number;
+  initialCols?: number;
+  initialMaxNumber?: number;
 }
 
-export const GridSizeForm: FC<GridSizeFormProps> = ({ onSubmit }) => {
-  const [rows, setRows] = useState(3);
-  const [cols, setCols] = useState(3);
-  const [maxNumber, setMaxNumber] = useState(9);
-
-  const MIN_SIZE = 3;
-  const MAX_SIZE = 6;
+export const GridSizeForm: FC<GridSizeFormProps> = ({ 
+  onSubmit, 
+  initialRows = 3, 
+  initialCols = 3, 
+  initialMaxNumber = 9 
+}) => {
+  const [rows, setRows] = useState(initialRows);
+  const [cols, setCols] = useState(initialCols);
+  const [maxNumber, setMaxNumber] = useState(initialMaxNumber);
 
   const handleIncrement = (setter: (value: number) => void, current: number) => {
-    if (current < MAX_SIZE) {
+    if (current < MAX_GRID_SIZE) {
       setter(current + 1);
     }
   };
 
   const handleDecrement = (setter: (value: number) => void, current: number) => {
-    if (current > MIN_SIZE) {
+    if (current > MIN_GRID_SIZE) {
       setter(current - 1);
     }
   };
@@ -62,7 +68,7 @@ export const GridSizeForm: FC<GridSizeFormProps> = ({ onSubmit }) => {
             type="button" 
             className={styles.controlButton}
             onClick={() => handleDecrement(setRows, rows)}
-            disabled={rows <= MIN_SIZE}
+            disabled={rows <= MIN_GRID_SIZE}
           >
             −
           </button>
@@ -71,7 +77,7 @@ export const GridSizeForm: FC<GridSizeFormProps> = ({ onSubmit }) => {
             type="button" 
             className={styles.controlButton}
             onClick={() => handleIncrement(setRows, rows)}
-            disabled={rows >= MAX_SIZE}
+            disabled={rows >= MAX_GRID_SIZE}
           >
             +
           </button>
@@ -84,7 +90,7 @@ export const GridSizeForm: FC<GridSizeFormProps> = ({ onSubmit }) => {
             type="button" 
             className={styles.controlButton}
             onClick={() => handleDecrement(setCols, cols)}
-            disabled={cols <= MIN_SIZE}
+            disabled={cols <= MIN_GRID_SIZE}
           >
             −
           </button>
@@ -93,7 +99,7 @@ export const GridSizeForm: FC<GridSizeFormProps> = ({ onSubmit }) => {
             type="button" 
             className={styles.controlButton}
             onClick={() => handleIncrement(setCols, cols)}
-            disabled={cols >= MAX_SIZE}
+            disabled={cols >= MAX_GRID_SIZE}
           >
             +
           </button>
