@@ -82,7 +82,6 @@ export const useBingoGame = (initialRows: number, initialCols: number, initialMa
 
   const generateGrid = (rows: number, cols: number, maxNumber: number) => {
     console.log(`Generating grid with ${rows} rows, ${cols} cols, max number ${maxNumber}`);
-    const totalCells = rows * cols;
     // Create array with sequential numbers
     // const numbers = Array.from({ length: totalCells }, (_, i) => i + 1);
     

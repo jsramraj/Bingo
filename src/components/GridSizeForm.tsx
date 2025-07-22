@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import type { FC } from 'react';
 import styles from './GridSizeForm.module.css';
-import { MIN_GRID_SIZE, MAX_GRID_SIZE, MIN_MAX_NUMBER, MAX_MAX_NUMBER } from '../constants';
+import { MIN_GRID_SIZE, MAX_GRID_SIZE } from '../constants';
 
 interface GridSizeFormProps {
   onSubmit: (rows: number, cols: number, maxNumber: number) => void;
