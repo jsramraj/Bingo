@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { generateRandomNumbers } from '../utils/numberGenerator';
 
 interface GameState {
   grid: number[][];
@@ -13,7 +14,7 @@ interface UseBingoGameResult {
   bingoLines: [number, number, number, 'row' | 'col' | 'diag' | 'antidiag'][];
   score: number;
   markCell: (row: number, col: number) => void;
-  resetGame: (rows: number, cols: number) => void;
+  resetGame: (rows: number, cols: number, maxNumber: number) => void;
 }
 
 const STORAGE_KEY = 'bingo-game-state';
@@ -27,7 +28,7 @@ const saveGameState = (state: GameState) => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 };
 
-export const useBingoGame = (initialRows: number, initialCols: number): UseBingoGameResult => {
+export const useBingoGame = (initialRows: number, initialCols: number, initialMaxNumber: number): UseBingoGameResult => {
   const [grid, setGrid] = useState<number[][]>(() => {
     const saved = loadGameState();
     return saved ? saved.grid : [];
@@ -79,23 +80,24 @@ export const useBingoGame = (initialRows: number, initialCols: number): UseBingo
     return newBingoLines;
   };
 
-  const generateGrid = (rows: number, cols: number) => {
+  const generateGrid = (rows: number, cols: number, maxNumber: number) => {
+    console.log(`Generating grid with ${rows} rows, ${cols} cols, max number ${maxNumber}`);
     const totalCells = rows * cols;
     // Create array with sequential numbers
-    const numbers = Array.from({ length: totalCells }, (_, i) => i + 1);
+    // const numbers = Array.from({ length: totalCells }, (_, i) => i + 1);
     
     // Shuffle array using Fisher-Yates algorithm
-    for (let i = numbers.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
-    }
+    // for (let i = numbers.length - 1; i > 0; i--) {
+    //   const j = Math.floor(Math.random() * (i + 1));
+    //   [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+    // }
 
-    const newGrid: number[][] = [];
+    const newGrid: number[][] = generateRandomNumbers(rows, cols, maxNumber);
     const newMarkedCells: boolean[][] = [];
     
     // Fill grid with shuffled numbers
     for (let i = 0; i < rows; i++) {
-      newGrid[i] = numbers.slice(i * cols, (i + 1) * cols);
+    //   newGrid[i] = numbers.slice(i * cols, (i + 1) * cols);
       newMarkedCells[i] = new Array(cols).fill(false);
     }
 
@@ -120,14 +122,14 @@ export const useBingoGame = (initialRows: number, initialCols: number): UseBingo
     saveGameState({ grid, markedCells: newMarkedCells, bingoLines: newBingoLines, score: newBingoLines.length });
   };
 
-  const resetGame = (rows: number, cols: number) => {
+  const resetGame = (rows: number, cols: number, maxNumber: number) => {
     localStorage.removeItem(STORAGE_KEY);
-    generateGrid(rows, cols);
+    generateGrid(rows, cols, maxNumber);
   };
 
   useEffect(() => {
     if (grid.length === 0) {
-      generateGrid(initialRows, initialCols);
+      generateGrid(initialRows, initialCols, initialMaxNumber);
     }
   }, []);
 

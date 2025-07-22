@@ -1,5 +1,9 @@
-export const generateRandomNumbers = (rows: number, cols: number): number[][] => {
-  const numbers = Array.from({ length: 75 }, (_, i) => i + 1);
+export const generateRandomNumbers = (rows: number, cols: number, maxNumber: number): number[][] => {
+  if (maxNumber == undefined) {
+    maxNumber = rows * cols;
+  }
+
+  const numbers = Array.from({ length: maxNumber }, (_, i) => i + 1);
   
   // Shuffle array
   for (let i = numbers.length - 1; i > 0; i--) {

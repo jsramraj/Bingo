@@ -10,10 +10,10 @@ function App() {
     const saved = localStorage.getItem('bingo-game-started');
     return saved === 'true';
   });
-  const { grid, markedCells, bingoLines, score, markCell, resetGame } = useBingoGame(3, 3);
+  const { grid, markedCells, bingoLines, score, markCell, resetGame } = useBingoGame(3, 3, 9);
 
-  const handleGridSizeSubmit = (rows: number, cols: number) => {
-    resetGame(rows, cols);
+  const handleGridSizeSubmit = (rows: number, cols: number, maxNumber: number) => {
+    resetGame(rows, cols, maxNumber);
     setGameStarted(true);
     localStorage.setItem('bingo-game-started', 'true');
   };
