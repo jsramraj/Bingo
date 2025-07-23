@@ -1,0 +1,174 @@
+.container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.helpButton {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.helpButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+.modalContent {
+  background: #1f2937;
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 90%;
+  width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  color: white;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+.closeButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 4px 12px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.modalContent h2 {
+  margin: 0 0 24px 0;
+  font-size: 24px;
+  color: white;
+  text-align: center;
+}
+
+.instructions {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.instructions h3 {
+  margin: 28px 0 12px 0;
+  font-size: 20px;
+  color: #60a5fa;
+  border-bottom: 1px solid rgba(96, 165, 250, 0.2);
+  padding-bottom: 8px;
+}
+
+.instructions p {
+  margin: 12px 0;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.instructions ol,
+.instructions ul {
+  margin: 12px 0;
+  padding-left: 24px;
+}
+
+.instructions li {
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+.instructions ul ul {
+  margin: 8px 0;
+  padding-left: 20px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.instructions ul li {
+  list-style-type: disc;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 600px) {
+  .container {
+    top: 12px;
+    right: 12px;
+  }
+
+  .helpButton {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .modalContent {
+    padding: 16px;
+    font-size: 14px;
+  }
+
+  .modalContent h2 {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .instructions h3 {
+    font-size: 16px;
+    margin: 16px 0 8px 0;
+  }
+
+  .instructions ol,
+  .instructions ul {
+    padding-left: 20px;
+  }
+
+  .instructions li {
+    margin: 6px 0;
+  }
+}

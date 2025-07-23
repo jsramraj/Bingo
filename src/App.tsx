@@ -3,6 +3,7 @@ import './App.css';
 import { BingoGrid } from './components/BingoGrid';
 import { GridSizeForm } from './components/GridSizeForm';
 import { ScoreAnimation } from './components/ScoreAnimation';
+import { GameInstructions } from './components/GameInstructions';
 import { useBingoGame } from './hooks/useBingoGame';
 import { MIN_GRID_SIZE, MAX_GRID_SIZE, MIN_MAX_NUMBER, MAX_MAX_NUMBER } from './constants';
 
@@ -75,6 +76,7 @@ function App() {
 
   return (
     <div className="app">
+      <GameInstructions />
       <h1>Bingo Game</h1>
       {!gameStarted ? (
         <GridSizeForm 
