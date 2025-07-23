@@ -106,7 +106,7 @@ export const GridSizeForm: FC<GridSizeFormProps> = ({
         </div>
       </div>
       <button type="submit" className={styles.submitButton}>
-        Create Bingo Grid
+        Create Game
       </button>
     </form>
   );
