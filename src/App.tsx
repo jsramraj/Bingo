@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import { BingoGrid } from './components/BingoGrid';
 import { GridSizeForm } from './components/GridSizeForm';
+import { ScoreAnimation } from './components/ScoreAnimation';
 import { useBingoGame } from './hooks/useBingoGame';
 import { MIN_GRID_SIZE, MAX_GRID_SIZE, MIN_MAX_NUMBER, MAX_MAX_NUMBER } from './constants';
 
@@ -39,6 +40,29 @@ function App() {
   });
 
   const { grid, markedCells, bingoLines, score, markCell, resetGame } = useBingoGame(3, 3, 9);
+  
+  // Track score changes to trigger animations
+  const [lastScore, setLastScore] = useState(0);
+  const [animationCounter, setAnimationCounter] = useState(0);
+  const [isFirstUpdate, setIsFirstUpdate] = useState(true);
+  
+  // Detect score changes and trigger animation
+  useEffect(() => {
+    if (isFirstUpdate) {
+      // Skip the first update to avoid animation on initial load
+      setIsFirstUpdate(false);
+      setLastScore(score);
+      return;
+    }
+    
+    console.log(`App: score=${score}, lastScore=${lastScore}`);
+    // Only trigger for positive score increases (not on initial load or reset)
+    if (score > lastScore && score > 0) {
+      setAnimationCounter(prev => prev + 1);
+    }
+    // Always update the last score
+    setLastScore(score);
+  }, [score, lastScore, isFirstUpdate]);
 
   const handleGridSizeSubmit = (rows: number, cols: number, maxNumber: number) => {
     resetGame(rows, cols, maxNumber);
@@ -69,11 +93,16 @@ function App() {
             onCellClick={markCell}
           />
           <button className="reset-button" onClick={() => {
+            // Reset game state
+            resetGame(3, 3, 9);
+            setLastScore(0);
+            setIsFirstUpdate(true);
             setGameStarted(false);
             localStorage.removeItem('bingo-game-started');
           }}>
             New Game
           </button>
+          <ScoreAnimation score={animationCounter} />
         </div>
       )}
     </div>
