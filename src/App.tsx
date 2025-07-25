@@ -6,6 +6,7 @@ import { ScoreAnimation } from './components/ScoreAnimation';
 import { GameInstructions } from './components/GameInstructions';
 import { useBingoGame } from './hooks/useBingoGame';
 import { MIN_GRID_SIZE, MAX_GRID_SIZE, MIN_MAX_NUMBER, MAX_MAX_NUMBER } from './constants';
+import { trackEvent } from './analytics';
 
 function App() {
   // Read and validate URL parameters
@@ -69,9 +70,10 @@ function App() {
     resetGame(rows, cols, maxNumber);
     setGameStarted(true);
     localStorage.setItem('bingo-game-started', 'true');
-    
     // Clear URL parameters when starting the game
     window.history.replaceState({}, '', window.location.pathname);
+    // Track new game click
+    trackEvent('new_game_click');
   };
 
   return (

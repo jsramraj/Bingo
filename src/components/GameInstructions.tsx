@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { trackEvent } from '../analytics';
 import styles from './GameInstructions.module.css';
 
 export const GameInstructions: React.FC = () => {
@@ -8,7 +9,10 @@ export const GameInstructions: React.FC = () => {
     <div className={styles.container}>
       <button 
         className={styles.helpButton}
-        onClick={() => setIsOpen(true)}
+        onClick={() => {
+          setIsOpen(true);
+          trackEvent('how_to_play_click');
+        }}
         aria-label="How to Play"
       >
         How to Play

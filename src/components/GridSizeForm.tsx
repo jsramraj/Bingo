@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { FC } from 'react';
 import styles from './GridSizeForm.module.css';
 import { MIN_GRID_SIZE, MAX_GRID_SIZE } from '../constants';
+import { trackEvent } from '../analytics';
 
 interface GridSizeFormProps {
   onSubmit: (rows: number, cols: number, maxNumber: number) => void;
@@ -39,6 +40,7 @@ export const GridSizeForm: FC<GridSizeFormProps> = ({
       alert(`Maximum number must be at least ${minRequired} (rows × columns)`);
       return;
     }
+    trackEvent('grid_config', { rows, cols, maxNumber });
     onSubmit(rows, cols, maxNumber);
   };
 
